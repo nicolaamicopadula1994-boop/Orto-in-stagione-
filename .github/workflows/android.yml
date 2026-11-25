@@ -31,6 +31,7 @@ jobs:
         run: |
           cd "$(dirname "$(find project -name package.json -print -quit)")"
           npm install
+          npm install -D typescript
           npx cap add android
           npx cap sync android
 
