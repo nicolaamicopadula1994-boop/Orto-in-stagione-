@@ -1,4 +1,3 @@
-
 name: Build Orto in Stagione Android
 
 on:
@@ -24,15 +23,14 @@ jobs:
           java-version: 21
 
       - name: Extract project
-        run: |
-          unzip -q Orto_in_Stagione_Android_progetto.zip -d project
+        run: unzip -q Orto_in_Stagione_Android_progetto.zip -d project
 
       - name: Prepare Android
         run: |
           cd "$(dirname "$(find project -name package.json -print -quit)")"
           npm install
-          npm install -D typescript
-          npm install -D ts-node
+          rm -f capacitor.config.ts
+          echo '{"appId":"it.ortoinstagione.app","appName":"Orto in Stagione","webDir":"www"}' > capacitor.config.json
           npx cap add android
           npx cap sync android
 
